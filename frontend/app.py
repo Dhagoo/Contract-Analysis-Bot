@@ -158,7 +158,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- Backend Config ---
-BACKEND_URL = "http://localhost:8001"
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8001")
 
 @st.cache_resource
 def get_backend():
