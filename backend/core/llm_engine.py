@@ -12,12 +12,23 @@ class LLMEngine:
     """
     def __init__(self, provider="openai"):
         self.provider = provider
+        api_key = os.getenv("OPENAI_API_KEY")
+        
         if provider == "openai":
-            self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             self.model = "gpt-4-turbo"
+            # Only initialize client if key is valid/present
+            if api_key and "your_" not in api_key:
+                self.client = OpenAI(api_key=api_key)
+            else:
+                self.client = None
+                
         elif provider == "anthropic":
-            self.client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+            anthropic_key = os.getenv("ANTHROPIC_API_KEY")
             self.model = "claude-3-opus-20240229"
+            if anthropic_key and "your_" not in anthropic_key:
+                self.client = Anthropic(api_key=anthropic_key)
+            else:
+                self.client = None
 
     def analyze_clause(self, clause_text: str, contract_type: str):
         """
