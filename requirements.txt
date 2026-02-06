@@ -1,0 +1,14 @@
+spacy
+nltk
+openai
+anthropic
+python-docx
+pdfplumber
+streamlit
+python-dotenv
+pandas
+PyPDF2
+fastapi
+uvicorn
+python-multipart
+plotly
